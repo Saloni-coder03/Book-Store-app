@@ -8,7 +8,7 @@ const{jwtAuthMiddleWare,generateToken} = require('./jwt.js');
 const mongoose = require('mongoose');
 //import router
 const bookroutes = require('./router/bookroutes.js');
-const userRoutes = require('./router/userRoutes.js');
+const userRoutes = require('./router/personRoutes.js');
 
 //for important files i.e. crucial information
 require('dotenv').config();
@@ -30,6 +30,7 @@ catch(err){
 
 //router use
 app.use('/book',bookroutes);
+app.use('/user',userRoutes);
 
 app.listen(PORT,()=>{
     console.log(`Server is up and running on port ${PORT}`);

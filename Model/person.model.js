@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -39,9 +39,8 @@ user.password = hashedPassword;
 next();
 }
 catch(err){
-    console.log(err);
-    return next(error);
-
+    console.error('Error in hashing password:', err);
+    return next(err);
 }
 })
 

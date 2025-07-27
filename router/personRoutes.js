@@ -1,15 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 // import the user model
-const User = require('../Model/user.model.js');
+const User = require('../Model/person.model.js');
 const {jwtAuthMiddleWare,generateToken} = require('../jwt.js');
 
 //register
 router.post('/register',async (req,res) =>{
 try{
     const{name,email,password,role} = req.body;
+  // Check if email already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: 'Email already registered' });
+    }
     // new registration
     const newUser = new User({name,email,password,role});
 //save

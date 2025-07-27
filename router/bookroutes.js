@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Book = require('../Model/book.model.js');
 //user model
-const User = require('../Model/user.model.js');
+const User = require('../Model/person.model.js');
 const {jwtAuthMiddleWare,generateToken} = require('../jwt.js');
 //middleware function
 const isAdmin = (req,res,next) =>{
