@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 
 // import the user model
-const User = require('../Model/person.model.js');
+const Person = require('../Model/person.model.js');
 const {jwtAuthMiddleWare,generateToken} = require('../jwt.js');
 
 //register
@@ -11,14 +11,14 @@ router.post('/register',async (req,res) =>{
 try{
     const{name,email,password,role} = req.body;
   // Check if email already exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await Person.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: 'Email already registered' });
     }
     // new registration
-    const newUser = new User({name,email,password,role});
+    const newPerson = new Person({name,email,password,role});
 //save
-const response =await newUser.save();
+const response =await newPerson.save();
 console.log("Registration successful");
 //token
 const payload = {
@@ -38,7 +38,7 @@ router.post('/login',async (req,res)=>{
 const {email,password} = req.body;
 try{
 //check unique thing i.e. email
-const user = await User.findOne({email});
+const user = await Person.findOne({email});
 if(!user){
     return res.status(404).json({message: 'User not found'});
 }
