@@ -22,7 +22,9 @@ const response =await newPerson.save();
 console.log("Registration successful");
 //token
 const payload = {
-    id: response.id
+    id: response.id,
+    role: response.role,
+    email: response.email
 };
 const token = generateToken(payload);
 res.status(200).json({response: response,token: token})
@@ -48,7 +50,9 @@ if(!match){
 }
 //token generation
 const payload = {
-id : user.id
+id : user.id,
+role: user.role,
+email: user.email
 }
 const token = generateToken(payload);
 console.log("token is : " +token);
@@ -59,5 +63,5 @@ catch(err){
     res.status(200).json({error: 'Internal server error' });
 }
 });
-
 module.exports = router;
+    
