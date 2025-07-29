@@ -30,7 +30,7 @@ catch(err){
 
 //router use
 app.use('/book',bookroutes);
-app.use('/person',userRoutes);
+app.use('/person',personRoutes);
 
 app.listen(PORT,()=>{
     console.log(`Server is up and running on port ${PORT}`);
